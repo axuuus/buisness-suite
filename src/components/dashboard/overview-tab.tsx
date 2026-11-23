@@ -86,6 +86,25 @@ export const OverviewTab: React.FC = () => {
   const [sortField, setSortField] = useState<keyof TransactionRow>("date");
   const [sortAsc, setSortAsc] = useState<boolean>(false);
   const [statusFilter, setStatusFilter] = useState<string>("All");
+  const [isStatusOpen, setIsStatusOpen] = useState<boolean>(false);
+  const statusRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (statusRef.current && !statusRef.current.contains(e.target as Node)) {
+        setIsStatusOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", handleOutsideClick);
+    return () => window.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  const STATUS_OPTIONS = [
+    { value: "All", label: "Wszystkie statusy" },
+    { value: "Paid", label: "Opłacone (Paid)" },
+    { value: "Waiting for payment", label: "Oczekuje na płatność" },
+    { value: "Shipped", label: "Wysłane (Shipped)" },
+  ];
 
   const cur = currentWorkspace.default_currency;
 
@@ -301,17 +320,39 @@ export const OverviewTab: React.FC = () => {
         <div className="th">
           <h2>Product Overview</h2>
           <div className="btns">
-            <select
-              className="btn text-xs bg-[var(--chip)] cursor-pointer outline-none"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              aria-label="Filter status"
-            >
-              <option value="All">Wszystkie statusy</option>
-              <option value="Paid">Opłacone (Paid)</option>
-              <option value="Waiting for payment">Oczekuje na płatność</option>
-              <option value="Shipped">Wysłane (Shipped)</option>
-            </select>
+            <div className="relative" ref={statusRef}>
+              <button
+                type="button"
+                className="btn text-xs bg-[var(--chip)]"
+                onClick={() => setIsStatusOpen(!isStatusOpen)}
+                aria-label="Filtruj status"
+              >
+                <span>{STATUS_OPTIONS.find((o) => o.value === statusFilter)?.label || "Wszystkie statusy"}</span>
+                <svg className="w-2.5 h-2.5 ml-1 opacity-70" viewBox="0 0 10 10">
+                  <path d="M1 3h8L5 8z" fill="currentColor" />
+                </svg>
+              </button>
+              {isStatusOpen && (
+                <div className="pop min-w-[13rem] right-0 top-10 shadow-2xl">
+                  {STATUS_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className="mi"
+                      onClick={() => {
+                        setStatusFilter(opt.value);
+                        setIsStatusOpen(false);
+                      }}
+                    >
+                      <span className={opt.value === statusFilter ? "text-[var(--rose)] font-semibold" : ""}>
+                        {opt.label}
+                      </span>
+                      {opt.value === statusFilter && <span className="text-[var(--rose)] font-bold">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               type="button"
               className="btn dark"

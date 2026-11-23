@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const content = (
     <aside
-      className={`sidebar flex flex-col justify-between h-full p-3.5 glass border-r border-[var(--line)] bg-[var(--shell)] backdrop-blur-2xl transition-all duration-300 z-40 ${
+      className={`sidebar flex flex-col justify-between flex-1 h-full min-h-full p-3.5 transition-all duration-300 z-40 ${
         isSidebarCollapsed ? "w-16 items-center" : "w-64"
       }`}
     >
@@ -290,7 +290,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* Desktop fixed sidebar */}
-      <div className="hidden lg:block h-full flex-none">{content}</div>
+      <div className="hidden lg:flex flex-col h-full flex-none self-stretch">{content}</div>
 
       {/* Mobile Drawer (<= 900px) */}
       {isSidebarOpen && (

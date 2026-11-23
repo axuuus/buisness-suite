@@ -149,7 +149,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
               </svg>
             </button>
             {isNotifOpen && (
-              <div className="pop" style={{ right: 0, top: "2.8rem" }}>
+              <div className="pop min-w-[19rem] shadow-2xl" style={{ right: 0, top: "2.8rem" }}>
                 <div className="pt font-semibold border-b border-[var(--line)] pb-1 mb-1">
                   Powiadomienia (3)
                 </div>
@@ -177,7 +177,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
               {currentUser.full_name.charAt(0)}
             </button>
             {isUserMenuOpen && (
-              <div className="pop" style={{ right: 0, top: "2.8rem" }}>
+              <div className="pop min-w-[14rem] shadow-2xl" style={{ right: 0, top: "2.8rem" }}>
                 <div className="pt border-b border-[var(--line)] pb-1 mb-1">
                   <div className="font-semibold text-[var(--text)]">{currentUser.full_name}</div>
                   <div className="text-[0.68rem] text-[var(--muted)]">{currentUser.email}</div>
@@ -242,7 +242,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
               </svg>
             </button>
             {isSeasonOpen && (
-              <div className="pop" style={{ left: 0, top: "2.5rem" }}>
+              <div className="pop min-w-[13rem] shadow-2xl" style={{ left: 0, top: "2.5rem" }}>
                 {SEASONS.map((s) => (
                   <button
                     key={s}
@@ -254,6 +254,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
                     }}
                   >
                     <span className={s === season ? "font-bold text-[var(--rose)]" : ""}>{s}</span>
+                    {s === season && <span className="text-[var(--rose)] font-bold">✓</span>}
                   </button>
                 ))}
               </div>
@@ -274,7 +275,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
               </svg>
             </button>
             {isPlatformOpen && (
-              <div className="pop" style={{ left: 0, top: "2.5rem" }}>
+              <div className="pop min-w-[13rem] shadow-2xl" style={{ left: 0, top: "2.5rem" }}>
                 {PLATFORMS.map((p) => (
                   <button
                     key={p}
@@ -286,6 +287,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
                     }}
                   >
                     <span className={p === platform ? "font-bold text-[var(--rose)]" : ""}>{p}</span>
+                    {p === platform && <span className="text-[var(--rose)] font-bold">✓</span>}
                   </button>
                 ))}
               </div>

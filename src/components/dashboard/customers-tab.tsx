@@ -27,6 +27,25 @@ const SAMPLE_CUSTOMERS: Customer[] = [
 export const CustomersTab: React.FC = () => {
   const { currentWorkspace, searchQuery } = useWorkspace();
   const [filterTier, setFilterTier] = useState<string>("All");
+  const [isTierOpen, setIsTierOpen] = useState<boolean>(false);
+  const tierRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (tierRef.current && !tierRef.current.contains(e.target as Node)) {
+        setIsTierOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", handleOutsideClick);
+    return () => window.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  const TIER_OPTIONS = [
+    { value: "All", label: "Wszystkie plany" },
+    { value: "Starter", label: "Starter" },
+    { value: "Pro", label: "Pro" },
+    { value: "Scale", label: "Scale" },
+  ];
 
   const cur = currentWorkspace.default_currency;
 
@@ -44,16 +63,38 @@ export const CustomersTab: React.FC = () => {
           <p className="text-xs text-[var(--muted)]">Zarządzanie klientami B2B, umowami i subskrypcjami</p>
         </div>
         <div className="flex gap-2">
-          <select
-            className="btn text-xs bg-[var(--chip)] cursor-pointer outline-none"
-            value={filterTier}
-            onChange={(e) => setFilterTier(e.target.value)}
-          >
-            <option value="All">Wszystkie plany</option>
-            <option value="Starter">Starter</option>
-            <option value="Pro">Pro</option>
-            <option value="Scale">Scale</option>
-          </select>
+          <div className="relative" ref={tierRef}>
+            <button
+              type="button"
+              className="btn text-xs bg-[var(--chip)]"
+              onClick={() => setIsTierOpen(!isTierOpen)}
+            >
+              <span>{TIER_OPTIONS.find((o) => o.value === filterTier)?.label || "Wszystkie plany"}</span>
+              <svg className="w-2.5 h-2.5 ml-1 opacity-70" viewBox="0 0 10 10">
+                <path d="M1 3h8L5 8z" fill="currentColor" />
+              </svg>
+            </button>
+            {isTierOpen && (
+              <div className="pop min-w-[11rem] right-0 top-10 shadow-2xl">
+                {TIER_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    className="mi"
+                    onClick={() => {
+                      setFilterTier(opt.value);
+                      setIsTierOpen(false);
+                    }}
+                  >
+                    <span className={opt.value === filterTier ? "text-[var(--rose)] font-semibold" : ""}>
+                      {opt.label}
+                    </span>
+                    {opt.value === filterTier && <span className="text-[var(--rose)] font-bold">✓</span>}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <Button variant="rose">+ Dodaj klienta</Button>
         </div>
       </div>

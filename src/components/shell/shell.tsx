@@ -55,7 +55,7 @@ const DashboardContent: React.FC = () => {
       <HeroBanner onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
 
       {/* 2. Middle Body: Sidebar + Main Content Area */}
-      <div className="flex flex-1 min-h-0 overflow-hidden relative">
+      <div className="flex flex-1 min-h-0 h-full items-stretch overflow-hidden relative">
         {/* Sidebar */}
         <Sidebar
           onNewTaskClick={() => setIsNewTaskModalOpen(true)}
@@ -63,7 +63,7 @@ const DashboardContent: React.FC = () => {
         />
 
         {/* Scrollable Main Area */}
-        <main className="main flex-1 min-h-0 overflow-y-auto" id="main">
+        <main className="main flex-1 min-h-0 h-full overflow-y-auto" id="main">
           {activeTab === "Overview" && <OverviewTab />}
           {activeTab === "Analytics" && <AnalyticsTab />}
           {activeTab === "Customers" && <CustomersTab />}

@@ -4,6 +4,17 @@ Ten plik gromadzi kluczowe decyzje architektoniczne i technologiczne podjęte po
 
 ---
 
+## 003 - Architektura komponentów nakładkowych (Popovers) i spójność kontrolek formularzy
+- **Data:** 2026-11-23
+- **Status:** Zaakceptowano
+- **Kontekst:** Domyślne kontrolki systemowe przeglądarki (`<select>`, menu systemowe) naruszały estetykę Soft Pink Liquid Glass i renderowały się w stylach platformowych (np. niebieskie zaznaczenia Windows/macOS, brak rozmycia). Popovery na tle banera z animacją traciły czytelność bez dedykowanej warstwy szkła.
+- **Decyzja:**
+  1. Wszystkie selektory i filtry są implementowane jako customowe kontrolki Liquid Glass (`.pop`, `.mi`) z `backdrop-filter: blur(28px)`, wewnętrznym podświetleniem (`inset 0 1px 1px var(--hi)`) i kolorem tła `var(--pop)`.
+  2. Pasek boczny (`Sidebar`) przyjmuje konstrukcję kolumny na pełną wysokość strony (`h-full items-stretch`), stając się integralnym elementem strukturalnym ramki zamiast pływającej karty.
+  3. Wszystkie menu rozwijane posiadają wskaźnik wybranej opcji (ptaszek/kolor akcentu) oraz obsługę kliknięcia poza obszar (`mousedown` listener).
+
+---
+
 ## 002 - Architektura wielotenantowa, role RBAC i implementacja Shella
 - **Data:** 2026-11-23
 - **Status:** Zaakceptowano

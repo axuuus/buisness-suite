@@ -5,6 +5,12 @@ Format bazuje na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.2.0] - Faza 1: Konta, workspace, shell - 2026-11-23
 
+### Poprawiono & Dopracowano (UI Polish)
+- Pasek boczny (`Sidebar`): rozciągnięty na pełną wysokość widoku (`100% / h-full`) bez odcięć i zaokrągleń u dołu ekranu.
+- Popovery i menu rozwijane: dodano klasy `.pop`, `.mi`, `.pt`, `.nt` zapewniające mrożone szkło Liquid Glass z rozmyciem `blur(28px)`, cieniem i eleganckim tłem `var(--pop)`.
+- Zastąpiono systemowe elementy `<select>` przeglądarki spójnymi komponentami Liquid Glass z obsługą zamykania poza obszarem i wskaźnikami zaznaczenia.
+- Stylowanie selektorów sezonu, platformy oraz powiadomień w `HeroBanner`.
+
 ### Dodano
 - Migracja bazy danych `supabase/migrations/20261123000001_phase1_auth_workspaces.sql`:
   - Tabele: `profiles`, `workspaces`, `memberships`, `invitations`.

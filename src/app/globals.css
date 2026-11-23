@@ -1005,6 +1005,92 @@ td.emp {
 }
 
 /* Modals, Overlays, Toast */
+/* Popovers and Floating Menus */
+.pop {
+  position: absolute;
+  z-index: 60;
+  min-width: 13rem;
+  max-width: min(22rem, 92vw);
+  max-height: 75dvh;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border-radius: 1.2rem;
+  background: var(--pop);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid var(--edge);
+  box-shadow: inset 0 1px 1px var(--hi),
+              0 1.5rem 3rem -0.8rem rgba(0, 0, 0, 0.6),
+              0 0.5rem 1.2rem -0.3rem rgba(140, 49, 80, 0.35);
+  color: var(--text);
+}
+
+.mi {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100% !important;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mi:hover {
+  background: var(--chip);
+}
+
+.mi span {
+  color: var(--text);
+}
+
+.mi:hover span, .mi.active span {
+  color: var(--rose);
+}
+
+.pt {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nt {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.76rem;
+  border-radius: 0.8rem;
+  color: var(--text);
+  line-height: 1.35;
+  transition: background-color 0.15s ease;
+}
+
+.nt:hover {
+  background: var(--chip);
+}
+
+/* Sidebar Styles */
+.sidebar {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--shell);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-right: 1px solid var(--line);
+  box-shadow: inset -1px 0 0 var(--line);
+  border-radius: 0 !important;
+}
+
 .ov {
   position: fixed;
   inset: 0;
