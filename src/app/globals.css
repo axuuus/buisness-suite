@@ -172,6 +172,439 @@ a:focus-visible {
   animation: drift 40s linear infinite alternate;
 }
 
+/* ==========================================================================
+   Component styles (Velodrome Liquid Glass & Apple-like UI)
+   ========================================================================== */
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 0.95rem;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  justify-content: center;
+  background: var(--chip);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 0 1px var(--line);
+  color: var(--text);
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(28, 28, 30, 0.1);
+}
+
+:root[data-theme="dark"] .btn:hover,
+:root:not([data-theme="light"]) .btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.dark {
+  background: linear-gradient(180deg, #3a3a3d, var(--char));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0.5rem 1.1rem -0.5rem rgba(28, 28, 30, 0.7);
+}
+
+.btn.dark:hover {
+  filter: brightness(1.12);
+}
+
+.btn.rose {
+  background: linear-gradient(180deg, var(--rose), var(--deep));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 0.5rem 1.2rem -0.5rem rgba(140, 49, 80, 0.5);
+}
+
+.btn.rose:hover {
+  filter: brightness(1.08);
+}
+
+.btn.chip {
+  background: var(--chip);
+  border: 1px solid var(--line);
+}
+
+/* Card & Card internal elements */
+.card {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.6rem;
+  padding: 1.25rem;
+  min-height: 16rem;
+}
+
+.ch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.ch > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ch svg.i {
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: 0.4rem;
+  border-radius: 50%;
+  background: var(--chip);
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.ch b {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.big {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.6rem;
+  font-size: clamp(1.7rem, 9cqi, 2.9rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.chip {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  background: var(--chip);
+  color: var(--text);
+}
+
+.sun {
+  margin-left: auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: var(--rose);
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  flex: none;
+}
+
+.sub {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin: 0.5rem 0 1.1rem;
+}
+
+.sub b {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.prog {
+  height: 1.25rem;
+  border-radius: 0.35rem;
+  background: var(--chip);
+  overflow: hidden;
+  display: flex;
+}
+
+.prog i {
+  display: block;
+  height: 100%;
+}
+
+.f1 {
+  background: linear-gradient(90deg, var(--deep), var(--rose));
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.f2 {
+  width: 13%;
+  background: repeating-linear-gradient(135deg, var(--silver) 0 2px, transparent 2px 5px);
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.3rem;
+}
+
+.mark, .tipw {
+  position: relative;
+  height: 2.3rem;
+}
+
+.tip {
+  position: absolute;
+  top: 0.2rem;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.65rem;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.tip em {
+  font-style: normal;
+  font-size: 0.62rem;
+  color: #fff;
+  padding: 0.1rem 0.45rem;
+  border-radius: 99px;
+  background: linear-gradient(180deg, var(--rose), var(--deep));
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem 1rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.stats b, .ins b {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+}
+
+.mini {
+  display: inline-block;
+  width: 1.4rem;
+  height: 0.32rem;
+  border-radius: 9px;
+  background: var(--chip);
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  overflow: hidden;
+}
+
+.mini i {
+  display: block;
+  height: 100%;
+  background: var(--rose);
+}
+
+.ins {
+  margin-top: auto;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  background: var(--chip);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.3rem;
+  height: 4.4rem;
+}
+
+.bars i {
+  flex: 1;
+  border-radius: 0.6rem;
+  background: var(--chip);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  transition: height 0.3s ease;
+}
+
+.bars i.on {
+  background: linear-gradient(180deg, var(--baby), var(--rose) 55%, var(--deep));
+}
+
+/* Controls: Segmented, Switch, Status */
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  padding: 0.22rem;
+  border-radius: 1.2rem;
+  background: var(--chip);
+  border: 1px solid var(--line);
+}
+
+.seg button {
+  padding: 0.32rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.seg button:hover {
+  color: var(--text);
+}
+
+.seg button.on {
+  background: linear-gradient(180deg, var(--rose), var(--deep));
+  color: #fff;
+  box-shadow: 0 2px 6px -1px rgba(140, 49, 80, 0.4);
+}
+
+.sw {
+  width: 2.6rem;
+  height: 1.5rem;
+  border-radius: 99px;
+  background: var(--chip);
+  position: relative;
+  flex: none;
+  box-shadow: inset 0 0 0 1px var(--line);
+  cursor: pointer;
+}
+
+.sw::after {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sw.on {
+  background: var(--rose);
+}
+
+.sw.on::after {
+  transform: translateX(1.1rem);
+}
+
+.st {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(244, 194, 208, 0.5);
+  color: var(--deep);
+}
+
+.st.ok {
+  background: rgba(175, 71, 105, 0.16);
+  color: var(--rose);
+}
+
+:root[data-theme="dark"] .st,
+:root:not([data-theme="light"]) .st {
+  color: var(--baby);
+}
+
+:root[data-theme="dark"] .st.ok,
+:root:not([data-theme="light"]) .st.ok {
+  color: #f0a3ba;
+}
+
+.pill {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.76rem;
+}
+
+/* Modals, Overlays, Toast */
+.ov {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(28, 28, 30, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.md {
+  width: min(32rem, 100%);
+  max-height: 90dvh;
+  overflow: auto;
+  border-radius: 1.6rem;
+  padding: 1.4rem;
+  background: var(--pop);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--edge);
+  box-shadow: inset 0 1px 1px var(--hi), 0 2rem 4rem -1.2rem rgba(0, 0, 0, 0.6);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.md h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 1rem);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 70;
+  max-width: 90vw;
+  padding: 0.6rem 1.1rem;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  background: var(--char);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0.8rem 1.8rem rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .stripes {
     animation: none;

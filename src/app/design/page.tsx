@@ -81,9 +81,9 @@ export default function DesignSystemPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-5 rounded-2xl glass">
           {/* Neutral */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-xs font-semibold text-[var(--muted)]">Wariant Neutralny (.btn)</h3>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-2 items-start">
               <Button onClick={() => showToast("Kliknięto Domyślny")}>Domyślny (Default)</Button>
               <Button className="hover:bg-[var(--chip)]">Hover / Focus</Button>
               <Button disabled>Wyłączony (Disabled)</Button>
@@ -92,9 +92,9 @@ export default function DesignSystemPage() {
           </div>
 
           {/* Dark */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-xs font-semibold text-[var(--muted)]">Wariant Ciemny (.btn.dark)</h3>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-2 items-start">
               <Button variant="dark" onClick={() => showToast("Kliknięto Ciemny")}>
                 Domyślny (Default)
               </Button>
@@ -108,9 +108,9 @@ export default function DesignSystemPage() {
           </div>
 
           {/* Rose */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-xs font-semibold text-[var(--muted)]">Wariant Rose (.btn.rose)</h3>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-2 items-start">
               <Button variant="rose" onClick={() => showToast("Kliknięto Rose")}>
                 Domyślny (Default)
               </Button>
@@ -124,9 +124,9 @@ export default function DesignSystemPage() {
           </div>
 
           {/* Interactive Trigger */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-xs font-semibold text-[var(--muted)]">Interakcje Modala & Toastu</h3>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-2 items-start">
               <Button variant="rose" onClick={() => setIsModalOpen(true)}>
                 Otwórz Modal (.md)
               </Button>
