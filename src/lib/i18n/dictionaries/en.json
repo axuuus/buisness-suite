@@ -1,0 +1,38 @@
+{
+  "common": {
+    "appName": "Velodrome",
+    "search": "Search...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading...",
+    "empty": "No data",
+    "error": "An error occurred",
+    "actions": "Actions",
+    "filter": "Filter",
+    "exportCsv": "Export CSV",
+    "all": "All",
+    "status": "Status"
+  },
+  "nav": {
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "customers": "Customers",
+    "billing": "Billing",
+    "reports": "Reports",
+    "settings": "Settings",
+    "design": "Design System"
+  },
+  "dashboard": {
+    "goodMorning": "Good Morning,",
+    "goodAfternoon": "Good Afternoon,",
+    "goodEvening": "Good Evening,",
+    "stable": "Stable",
+    "growing": "Growing",
+    "mrr": "Monthly Recurring Revenue",
+    "netGrowth": "Net Revenue Growth",
+    "activeUsers": "Active Users"
+  }
+}

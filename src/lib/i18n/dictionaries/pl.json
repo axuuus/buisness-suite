@@ -1,0 +1,38 @@
+{
+  "common": {
+    "appName": "Velodrome",
+    "search": "Szukaj...",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "close": "Zamknij",
+    "loading": "Ładowanie...",
+    "empty": "Brak danych",
+    "error": "Wystąpił błąd",
+    "actions": "Akcje",
+    "filter": "Filtruj",
+    "exportCsv": "Eksportuj CSV",
+    "all": "Wszystkie",
+    "status": "Status"
+  },
+  "nav": {
+    "overview": "Przegląd",
+    "analytics": "Analityka",
+    "customers": "Klienci",
+    "billing": "Płatności",
+    "reports": "Raporty",
+    "settings": "Ustawienia",
+    "design": "System Wyglądu"
+  },
+  "dashboard": {
+    "goodMorning": "Dzień dobry,",
+    "goodAfternoon": "Dzień dobry,",
+    "goodEvening": "Dobry wieczór,",
+    "stable": "Stabilny",
+    "growing": "Wzrost",
+    "mrr": "Miesięczny Przychód Powtarzalny",
+    "netGrowth": "Dynamika Zysku Netto",
+    "activeUsers": "Aktywni Użytkownicy"
+  }
+}
