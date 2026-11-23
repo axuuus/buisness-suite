@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import { WorkspaceProvider, useWorkspace } from "@/context/workspace-context";
+import { TaskProvider, useTask } from "@/context/task-context";
 import { HeroBanner } from "@/components/shell/hero-banner";
 import { Sidebar } from "@/components/shell/sidebar";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { OverviewTab } from "@/components/dashboard/overview-tab";
+import { TaskListView } from "@/components/tasks/task-list-view";
 import { AnalyticsTab } from "@/components/dashboard/analytics-tab";
 import { CustomersTab } from "@/components/dashboard/customers-tab";
 import { BillingTab } from "@/components/dashboard/billing-tab";
@@ -15,7 +17,8 @@ import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 
 const DashboardContent: React.FC = () => {
-  const { activeTab, createWorkspace } = useWorkspace();
+  const { activeTab, setActiveTab, createWorkspace } = useWorkspace();
+  const { spaces, createTask, setSelectedTaskId } = useTask();
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   const [isNewWorkspaceModalOpen, setIsNewWorkspaceModalOpen] = useState(false);
@@ -25,7 +28,7 @@ const DashboardContent: React.FC = () => {
 
   // New task form state
   const [taskTitle, setTaskTitle] = useState("");
-  const [taskSpace, setTaskSpace] = useState("Operations");
+  const [taskSpaceId, setTaskSpaceId] = useState(spaces[0]?.id || "");
 
   const showToast = (msg: string) => {
     setToastMsg(msg);
@@ -44,8 +47,11 @@ const DashboardContent: React.FC = () => {
   const handleCreateTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!taskTitle.trim()) return;
+    const created = createTask({ title: taskTitle.trim() });
     setIsNewTaskModalOpen(false);
-    showToast(`Utworzono zadanie "${taskTitle}" w ${taskSpace}!`);
+    setActiveTab("Tasks");
+    setSelectedTaskId(created.id);
+    showToast(`Utworzono zadanie "${taskTitle}"!`);
     setTaskTitle("");
   };
 
@@ -65,6 +71,7 @@ const DashboardContent: React.FC = () => {
         {/* Scrollable Main Area */}
         <main className="main flex-1 min-h-0 h-full overflow-y-auto" id="main">
           {activeTab === "Overview" && <OverviewTab />}
+          {activeTab === "Tasks" && <TaskListView />}
           {activeTab === "Analytics" && <AnalyticsTab />}
           {activeTab === "Customers" && <CustomersTab />}
           {activeTab === "Billing" && <BillingTab />}
@@ -106,13 +113,15 @@ const DashboardContent: React.FC = () => {
               Przestrzeń (Space)
             </label>
             <select
-              value={taskSpace}
-              onChange={(e) => setTaskSpace(e.target.value)}
+              value={taskSpaceId}
+              onChange={(e) => setTaskSpaceId(e.target.value)}
               className="w-full text-xs p-2.5 rounded-xl bg-[var(--chip)] border border-[var(--line)] outline-none"
             >
-              <option value="Operations">Operations</option>
-              <option value="Client Projects">Client Projects</option>
-              <option value="Finanse & Rozliczenia">Finanse & Rozliczenia</option>
+              {spaces.map((sp) => (
+                <option key={sp.id} value={sp.id}>
+                  {sp.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex justify-end gap-2 pt-2">
@@ -184,7 +193,9 @@ const DashboardContent: React.FC = () => {
 export const DashboardShell: React.FC = () => {
   return (
     <WorkspaceProvider>
-      <DashboardContent />
+      <TaskProvider>
+        <DashboardContent />
+      </TaskProvider>
     </WorkspaceProvider>
   );
 };

@@ -69,7 +69,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenCommandPalette }) 
     return () => window.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  const TABS: TabName[] = ["Overview", "Analytics", "Customers", "Billing", "Reports", "Settings"];
+  const TABS: TabName[] = ["Overview", "Tasks", "Analytics", "Customers", "Billing", "Reports", "Settings"];
   const SEASONS: SeasonName[] = ["2024 Season", "2025 Season", "2026 Season"];
   const PLATFORMS: PlatformFilter[] = ["All", "Tiktok Shop", "Instagram", "Shopify"];
 

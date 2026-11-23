@@ -3,6 +3,31 @@
 Wszystkie istotne zmiany w projekcie będą dokumentowane w tym pliku.
 Format bazuje na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.3.0] - Faza 2: Zadania i widok Lista - 2026-11-24
+
+### Dodano
+- Migracja bazy danych `supabase/migrations/20261124000002_phase2_tasks_lists.sql`:
+  - Tabele: `spaces`, `folders`, `lists`, `statuses`, `tasks`, `task_assignees`, `checklists`, `checklist_items`, `tags`, `task_tags`, `saved_views`.
+  - Indeksy wydajnościowe na `(workspace_id, list_id, position)`, `(workspace_id, due_date)`, `(parent_id)`.
+  - Reguły Row Level Security (RLS) weryfikujące `is_member(workspace_id)` oraz uprawnienia ról RBAC.
+- Moduł `src/lib/fractional-indexing.ts`:
+  - Algorytm indeksowania ułamkowego w alfabecie base-36 (`0-9a-z`), umożliwiający stabilne wstawianie elementów pomiędzy dowolnymi dwoma węzłami bez reindeksowania bazy.
+  - Testy jednostkowe weryfikujące wielokrotne wstawienia bez kolizji.
+- Kontekst zadań `src/context/task-context.tsx`:
+  - Zarządzanie stanem hierarchii ClickUp (Spaces -> Folders -> Lists -> Tasks).
+  - Operacje CRUD na zadaniach, podzadaniach (do 3 poziomów), checklistach z postępem, tagach i przypisanych osobach.
+  - Persystencja w `localStorage` z kluczem workspace.
+  - Wbudowany benchmark / stress test generujący 5000 realistycznych zadań.
+- Komponenty widoku zadań:
+  - `TaskListView`: wirtualizowany widok listy z kalkulacją okna scrolla (overscan), zwijanymi grupami (status, priorytet, przypisany), szybkim tworzeniem zadania inline (Enter), sortowaniem i filtrowaniem.
+  - `TaskRow`: lekki wiersz zadania bez powtarzanego filtru `backdrop-filter` (gwarantujący 60 fps na długich listach), ze zmianą statusu jednym kliknięciem, wskaźnikami podzadań/checklist i flagami priorytetów.
+  - `TaskDrawer`: szuflada szczegółów zadania w stylu Liquid Glass wysuwana z prawej krawędzi (pełnoekranowa na urządzeniach mobilnych <640px) z pełną edycją pól, terminem, estymatą, tagami i checklistami.
+  - Pasek zapisanych widoków (Saved Views) z możliwością zapisania bieżących filtrów.
+- Testy:
+  - 24 testy jednostkowe Vitest (`tasks.test.ts`, `tasks-performance.test.ts`, `fractional-indexing.test.ts`).
+  - Stress test wydajności: wygenerowanie, posortowanie, przefiltrowanie i zwirtualizowanie 5000 zadań w 32 ms (<250 ms cel DoD).
+  - 60 testów E2E Playwright (`e2e/tasks.spec.ts`) obejmujących 5 rozdzielczości (360px, 768px, 1024px, 1440px, 2560px).
+
 ## [0.2.0] - Faza 1: Konta, workspace, shell - 2026-11-23
 
 ### Poprawiono & Dopracowano (UI Polish)

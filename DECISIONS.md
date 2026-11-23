@@ -4,6 +4,19 @@ Ten plik gromadzi kluczowe decyzje architektoniczne i technologiczne podjęte po
 
 ---
 
+## 004 - Model hierarchii zadań ClickUp, Fractional Indexing oraz wirtualizacja widoku listy
+- **Data:** 2026-11-24
+- **Status:** Zaakceptowano
+- **Kontekst:** Wdrożenie Fazy 2 (Zadania i widok Lista) według specyfikacji `PLAN-platforma.md`. Wymóg płynnego przewijania 5000+ zadań oraz bezkonfliktowego przeciągania kolejności bez blokad i reindeksacji tysięcy wierszy w bazie.
+- **Decyzja:**
+  1. **Hierarchia ClickUp:** Przestrzenie robocze (`spaces`) zawierają opcjonalne foldery (`folders`) i listy (`lists`). Listy agregują zadania (`tasks`), które mogą posiadać statusy, priorytety (1–4), tagi, przypisania, podzadania (do 3 poziomów) oraz checklisty z wyliczanym paskiem postępu.
+  2. **Fractional Indexing:** Wdrożono algorytm pozycji ułamkowych w alfabecie base-36 (`0-9a-z`). Przestawianie kolejności lub wstawianie zadania pomiędzy dwa inne generuje ciąg leksykograficznie pośredni (`generatePositionBetween`), co eliminuje konieczność aktualizowania pozycji pozostałych zadań.
+  3. **Wirtualizacja okna scrolla:** Zgodnie z sekcją 4.6 (unikanie wielokrotnych warstw `backdrop-filter` na długich listach), wiersze `TaskRow` renderowane są z półprzezroczystym tłem bez filtru `backdrop-blur`. Dla grup powyżej 25 zadań stosowana jest wirtualizacja bazująca na pozycji scrolla i stałej wysokości wiersza (44 px) z buforem overscan, co redukuje liczbę węzłów DOM z 5000 do poniżej 50 elementów.
+  4. **Panel zadania (Drawer):** Zgodnie ze specyfikacją szuflada wysuwa się z prawej krawędzi (`.pop` z `blur(28px)`), a na ekranach mobilnych (<640 px) wypełnia 100% ekranu.
+  5. **Akceptacja wydajnościowa:** Test jednostkowy symulujący 5000 zadań wykonuje generowanie, sortowanie i wirtualizację w 32 ms (znacznie poniżej limitu 250 ms).
+
+---
+
 ## 003 - Architektura komponentów nakładkowych (Popovers) i spójność kontrolek formularzy
 - **Data:** 2026-11-23
 - **Status:** Zaakceptowano

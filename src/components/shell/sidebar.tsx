@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useWorkspace } from "@/context/workspace-context";
+import { useTask } from "@/context/task-context";
 import { getRoleLabel } from "@/lib/permissions";
 import { Button } from "@/components/ui/button";
 
@@ -27,37 +28,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
     setActiveTab,
   } = useWorkspace();
 
+  const { spaces, activeListId, setActiveListId, setActiveSpaceId } = useTask();
+
   const [isWorkspaceMenuOpen, setIsWorkspaceMenuOpen] = useState(false);
   const [openSpaces, setOpenSpaces] = useState<Record<string, boolean>>({
-    ops: true,
-    clients: true,
-    fin: false,
+    "sp-client-projects": true,
+    "sp-finance": true,
+    "sp-marketing": true,
   });
 
   const toggleSpace = (id: string) => {
     setOpenSpaces((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-
-  const SPACES = [
-    {
-      id: "ops",
-      name: "Operations",
-      color: "#AF4769",
-      lists: ["Zadania operacyjne", "Sprint Q2", "Błędy & Poprawki"],
-    },
-    {
-      id: "clients",
-      name: "Client Projects",
-      color: "#8C3150",
-      lists: ["Website Redesign", "Kampania Q2", "Aplikacja mobilna"],
-    },
-    {
-      id: "fin",
-      name: "Finanse & Rozliczenia",
-      color: "#C98A2B",
-      lists: ["Budżet główny", "Faktury i płatności", "Koszty podwykonawców"],
-    },
-  ];
 
   const content = (
     <aside
@@ -179,6 +161,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             type="button"
             onClick={() => {
+              setActiveTab("Tasks");
+              setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              activeTab === "Tasks"
+                ? "bg-[var(--chip)] text-[var(--rose)] font-semibold"
+                : "text-[var(--text)] hover:bg-[var(--chip)]"
+            }`}
+          >
+            <svg className="w-4 h-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 11l3 3L22 4" />
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </svg>
+            {!isSidebarCollapsed && <span>Zadania (Lista)</span>}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
               setActiveTab("Analytics");
               setIsSidebarOpen(false);
             }}
@@ -221,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               Przestrzenie (Spaces)
             </div>
             <div className="space-y-2">
-              {SPACES.map((sp) => (
+              {spaces.map((sp) => (
                 <div key={sp.id} className="space-y-0.5">
                   <button
                     type="button"
@@ -241,15 +242,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <div className="pl-4 space-y-0.5">
                       {sp.lists.map((lst) => (
                         <button
-                          key={lst}
+                          key={lst.id}
                           type="button"
                           onClick={() => {
-                            setActiveTab("Overview");
+                            setActiveSpaceId(sp.id);
+                            setActiveListId(lst.id);
+                            setActiveTab("Tasks");
                             setIsSidebarOpen(false);
                           }}
-                          className="w-full text-left px-2 py-1 text-[0.72rem] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--chip)] rounded truncate block"
+                          className={`w-full text-left px-2 py-1 text-[0.72rem] rounded truncate block transition ${
+                            activeTab === "Tasks" && activeListId === lst.id
+                              ? "text-[var(--rose)] font-semibold bg-[var(--chip)]"
+                              : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--chip)]"
+                          }`}
                         >
-                          • {lst}
+                          • {lst.name}
                         </button>
                       ))}
                     </div>

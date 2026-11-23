@@ -5,7 +5,7 @@ import { Workspace, UserProfile, WorkspaceMember, WorkspaceInvitation } from "@/
 import { Role } from "@/lib/permissions";
 import { BRAND } from "@/config/brand";
 
-export type TabName = "Overview" | "Analytics" | "Customers" | "Billing" | "Reports" | "Settings";
+export type TabName = "Overview" | "Tasks" | "Analytics" | "Customers" | "Billing" | "Reports" | "Settings";
 export type SeasonName = "2024 Season" | "2025 Season" | "2026 Season";
 export type PlatformFilter = "All" | "Tiktok Shop" | "Instagram" | "Shopify";
 
