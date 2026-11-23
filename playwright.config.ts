@@ -20,7 +20,14 @@ export default defineConfig({
       },
     },
     {
-      name: "Desktop Chrome (1024px)",
+      name: "Tablet Chrome (768px)",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 768, height: 1024 },
+      },
+    },
+    {
+      name: "Laptop Chrome (1024px)",
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 1024, height: 768 },
@@ -31,6 +38,13 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 1440, height: 900 },
+      },
+    },
+    {
+      name: "UltraWide Chrome (2560px)",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 2560, height: 1440 },
       },
     },
   ],

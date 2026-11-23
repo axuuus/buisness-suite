@@ -3,6 +3,26 @@
 Wszystkie istotne zmiany w projekcie będą dokumentowane w tym pliku.
 Format bazuje na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.2.0] - Faza 1: Konta, workspace, shell - 2026-11-23
+
+### Dodano
+- Migracja bazy danych `supabase/migrations/20261123000001_phase1_auth_workspaces.sql`:
+  - Tabele: `profiles`, `workspaces`, `memberships`, `invitations`.
+  - Funkcje RLS: `is_member(ws_id)`, `has_role(ws_id, allowed_roles)`, `get_user_role(ws_id)`.
+  - Ścisłe reguły Row Level Security dla wielotenantowości i ról.
+- Moduł uprawnień `src/lib/permissions.ts` z macierzą uprawnień dla 5 ról (Owner, Admin, Manager, Member, Viewer) i regułą izolacji stawek finansowych.
+- Kontekst i zarządzanie stanem `src/context/workspace-context.tsx` (przełączanie przestrzeni roboczych, motywy, animacje, filtry).
+- Shell Dashboardu z referencji:
+  - `HeroBanner` z animowanymi pasami Liquid Glass, powitaniem zależnym od pory dnia, pigułkami KPI i selektorami.
+  - Pasek boczny `Sidebar` z drzewem ClickUp (Spaces -> Folders -> Lists), szybkim dodawaniem zadania, przełącznikiem workspace i szufladą mobilną.
+  - Paleta poleceń `CommandPalette` aktywowana skrótem `Ctrl+K` / `Cmd+K` lub przyciskiem w wyszukiwarce.
+  - 6 zakładek widoków: `Overview`, `Analytics`, `Customers`, `Billing`, `Reports`, `Settings`.
+  - Kafelki KPI z wykresami liniowymi, słupkami i tabelą zamówień/produktów z sortowaniem i eksportem CSV.
+- Testy jednostkowe:
+  - `src/lib/permissions.test.ts` (weryfikacja uprawnień i restrykcji finansowych).
+  - `src/lib/workspace.test.ts` (izolacja tenantów, brak widoczności danych między workspace'ami).
+- Testy E2E (`e2e/shell.spec.ts`) obejmujące 5 viewportów (360px, 768px, 1024px, 1440px, 2560px).
+
 ## [0.1.0] - Faza 0: Fundament - 2026-11-23
 
 ### Dodano
