@@ -86,10 +86,10 @@ export const CustomersTab: React.FC = () => {
                       setIsTierOpen(false);
                     }}
                   >
-                    <span className={opt.value === filterTier ? "text-[var(--rose)] font-semibold" : ""}>
+                    <span className={opt.value === filterTier ? "text-[var(--accent)] font-semibold" : ""}>
                       {opt.label}
                     </span>
-                    {opt.value === filterTier && <span className="text-[var(--rose)] font-bold">✓</span>}
+                    {opt.value === filterTier && <span className="text-[var(--accent)] font-bold">✓</span>}
                   </button>
                 ))}
               </div>

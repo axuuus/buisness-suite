@@ -204,7 +204,7 @@ export const TaskDrawer: React.FC = () => {
               onChange={(e) => setTitle(e.target.value)}
               onBlur={handleTitleBlur}
               placeholder="Tytuł zadania..."
-              className="w-full text-xl font-bold bg-transparent border-b border-transparent hover:border-[var(--line)] focus:border-[var(--rose)] outline-none text-[var(--text)] transition pb-1"
+              className="w-full text-xl font-bold bg-transparent border-b border-transparent hover:border-[var(--line)] focus:border-[var(--accent)] outline-none text-[var(--text)] transition pb-1"
             />
           </div>
 
@@ -254,7 +254,7 @@ export const TaskDrawer: React.FC = () => {
                       onClick={() => toggleAssignee(m.user_id)}
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border transition ${
                         isAssigned
-                          ? "bg-[var(--rose)] text-white border-[var(--rose)]"
+                          ? "bg-[var(--accent)] text-white border-[var(--accent)]"
                           : "bg-[var(--surface)] text-[var(--muted)] border-[var(--line)] hover:border-[var(--text)]"
                       }`}
                     >
@@ -307,7 +307,7 @@ export const TaskDrawer: React.FC = () => {
               onChange={(e) => setDescription(e.target.value)}
               onBlur={handleDescriptionBlur}
               placeholder="Dodaj szczegółowy opis zadania, wymagania techniczne lub wytyczne..."
-              className="w-full bg-[var(--surface)] text-[var(--text)] text-xs p-3 rounded-xl border border-[var(--line)] focus:border-[var(--rose)] outline-none transition resize-y leading-relaxed"
+              className="w-full bg-[var(--surface)] text-[var(--text)] text-xs p-3 rounded-xl border border-[var(--line)] focus:border-[var(--accent)] outline-none transition resize-y leading-relaxed"
             />
           </div>
 
@@ -320,7 +320,7 @@ export const TaskDrawer: React.FC = () => {
               <button
                 type="button"
                 onClick={handleAddChecklist}
-                className="text-xs text-[var(--rose)] hover:underline font-medium"
+                className="text-xs text-[var(--accent)] hover:underline font-medium"
               >
                 + Nowa lista
               </button>
@@ -342,7 +342,7 @@ export const TaskDrawer: React.FC = () => {
                     {/* Progress bar */}
                     <div className="w-full h-1.5 bg-black/20 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-[var(--rose)] to-[var(--baby)] transition-all duration-300"
+                        className="h-full bg-gradient-to-r from-[var(--accent)] to-[var(--blue-400)] transition-all duration-300"
                         style={{ width: `${pct}%` }}
                       />
                     </div>
@@ -356,7 +356,7 @@ export const TaskDrawer: React.FC = () => {
                               type="checkbox"
                               checked={item.is_completed}
                               onChange={() => toggleChecklistItem(chk.id, item.id)}
-                              className="rounded border-[var(--line)] text-[var(--rose)] focus:ring-0 cursor-pointer"
+                              className="rounded border-[var(--line)] text-[var(--accent)] focus:ring-0 cursor-pointer"
                             />
                             <span className={item.is_completed ? "line-through text-[var(--muted)]" : "text-[var(--text)]"}>
                               {item.title}

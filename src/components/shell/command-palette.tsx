@@ -185,7 +185,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 onClick={cmd.action}
                 className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-left hover:bg-[var(--chip)] transition-colors group"
               >
-                <span className="font-medium text-[var(--text)] group-hover:text-[var(--rose)]">
+                <span className="font-medium text-[var(--text)] group-hover:text-[var(--accent)]">
                   {cmd.title}
                 </span>
                 <span className="text-[0.65rem] text-[var(--muted)] bg-[var(--chip)] px-2 py-0.5 rounded-full">

@@ -4,6 +4,21 @@ Ten plik gromadzi kluczowe decyzje architektoniczne i technologiczne podjęte po
 
 ---
 
+## 005 - Redesign systemu wizualnego: "Clean Data Light" (Faza R)
+- **Data:** 2026-11-24
+- **Status:** Zaakceptowano
+- **Kontekst:** Wdrożenie Fazy R według specyfikacji `DESIGN-v2-redesign.md`, zastępującej sekcję 4 `PLAN-platforma.md`. Wycofanie stylu Soft Pink Liquid Glass na rzecz czystego, technicznego wyglądu "Clean Data Light" (biel, neutralna szarość, niebieski akcent główny, wielokolorowe kreskowane serie danych).
+- **Decyzje (zgodnie z sekcją 10 specyfikacji):**
+  1. **Zastąpienie sekcji 4:** Sekcja 4 planu została w całości zastąpiona przez `DESIGN-v2-redesign.md`. Marka zachowuje nazwę Velodrome.
+  2. **Paleta barw:** Neutralna baza (`--bg: #F4F6F8`, `--surface: #ffffff`) + niebieski akcent główny (`--blue-500: #2F6BFF`). Kolory zielony (`--green-500`), różowy (`--pink-500`), pomarańczowy (`--orange-500`) i czerwony (`--red-500`) służą wyłącznie jako serie danych, statusy i alerty. Różowa marka z v1 została całkowicie wycofana.
+  3. **Ograniczenie szkła:** Efekt szkła (`backdrop-filter: blur(...)`) jest dozwolony wyłącznie na elementach pływających (`.float`: tooltipy, popovery, modale, toasty, pasek poleceń). Karty (`.card`) i tabele (`.tw`) są solidne (`--surface`) z miękkim cieniem (`--sh-card`), bez rozmycia pod spodem, co gwarantuje natychmiastowe przewijanie i czytelność.
+  4. **Pasek poleceń (Command Bar):** Działa deterministycznie bez LLM. Wszelkie przyszłe integracje AI znajdują się za flagą `AI_ENABLED=false`.
+  5. **"Add widget":** Mechanizm dostosowywania dashboardu ograniczony do włączania/wyłączania widgetów oraz zmiany ich kolejności, z persystencją w tabeli `user_dashboard_layouts`.
+  6. **Karta Insights:** Spostrzeżenia i alerty finansowe generowane deterministycznie przez silnik reguł z `lib/finance`.
+  7. **Typografia:** Wdrożono krój Geist (zastępując Inter Tight) z fallbackiem `system-ui, -apple-system, sans-serif`.
+
+---
+
 ## 004 - Model hierarchii zadań ClickUp, Fractional Indexing oraz wirtualizacja widoku listy
 - **Data:** 2026-11-24
 - **Status:** Zaakceptowano

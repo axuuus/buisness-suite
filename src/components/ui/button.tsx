@@ -1,26 +1,31 @@
 import React from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "neutral" | "dark" | "rose" | "chip";
+  variant?: "neutral" | "dark" | "rose" | "chip" | "primary" | "ghost";
+  size?: "sm" | "md" | "lg";
   isLoading?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "neutral", isLoading, children, className = "", disabled, ...props }, ref) => {
+  ({ variant = "neutral", size, isLoading, children, className = "", disabled, ...props }, ref) => {
     let variantClasses = "btn";
     if (variant === "dark") {
-      variantClasses = "btn dark";
-    } else if (variant === "rose") {
-      variantClasses = "btn rose";
+      variantClasses = "btn";
+    } else if (variant === "rose" || variant === "primary") {
+      variantClasses = "btn primary";
     } else if (variant === "chip") {
-      variantClasses = "btn chip";
+      variantClasses = "seg";
+    } else if (variant === "ghost") {
+      variantClasses = "seg gray";
     }
+
+    const sizeClass = size === "sm" ? "text-xs h-8 px-3" : "";
 
     return (
       <button
         ref={ref}
         disabled={disabled || isLoading}
-        className={`${variantClasses} ${disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""} ${className}`}
+        className={`${variantClasses} ${sizeClass} ${disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""} ${className}`}
         {...props}
       >
         {isLoading && (

@@ -291,7 +291,7 @@ export const TaskListView: React.FC = () => {
                 onClick={() => applySavedView(sv)}
                 className={`px-2.5 py-1 rounded-lg text-xs font-medium transition ${
                   sv.id === activeSavedViewId
-                    ? "bg-[var(--rose)] text-white"
+                    ? "bg-[var(--accent)] text-white"
                     : "bg-[var(--chip)] text-[var(--muted)] hover:text-[var(--text)]"
                 }`}
               >
@@ -301,7 +301,7 @@ export const TaskListView: React.FC = () => {
             <button
               type="button"
               onClick={() => setSaveViewModalOpen(true)}
-              className="text-xs text-[var(--rose)] hover:underline px-1.5"
+              className="text-xs text-[var(--accent)] hover:underline px-1.5"
             >
               + Zapisz widok
             </button>
@@ -317,7 +317,7 @@ export const TaskListView: React.FC = () => {
             className={`text-xs px-3 py-1.5 rounded-full font-semibold border transition ${
               is5kStressMode
                 ? "bg-amber-500/20 text-amber-300 border-amber-500/50"
-                : "bg-[var(--chip)] text-[var(--rose)] border-[var(--rose)]/30 hover:border-[var(--rose)]"
+                : "bg-[var(--chip)] text-[var(--accent)] border-[var(--accent)]/30 hover:border-[var(--accent)]"
             }`}
           >
             {is5kStressMode ? "↺ Resetuj do 5 zadań" : "⚡ Testuj 5000 zadań"}
@@ -374,7 +374,7 @@ export const TaskListView: React.FC = () => {
             placeholder="Szukaj zadań..."
             value={filter.search || ""}
             onChange={(e) => setFilter((prev) => ({ ...prev, search: e.target.value }))}
-            className="w-full bg-[var(--chip)] text-[var(--text)] text-xs px-3 py-1.5 pl-8 rounded-xl border border-[var(--line)] outline-none focus:border-[var(--rose)]"
+            className="w-full bg-[var(--chip)] text-[var(--text)] text-xs px-3 py-1.5 pl-8 rounded-xl border border-[var(--line)] outline-none focus:border-[var(--accent)]"
           />
           <svg
             className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[var(--muted)]"
@@ -408,7 +408,7 @@ export const TaskListView: React.FC = () => {
                 }
                 className={`px-2 py-1 rounded-lg text-[0.7rem] font-medium border transition ${
                   isSelected
-                    ? "bg-[var(--rose)] text-white border-[var(--rose)]"
+                    ? "bg-[var(--accent)] text-white border-[var(--accent)]"
                     : "bg-[var(--chip)] text-[var(--muted)] border-[var(--line)] hover:border-[var(--text)]"
                 }`}
               >
@@ -423,7 +423,7 @@ export const TaskListView: React.FC = () => {
           <button
             type="button"
             onClick={() => setFilter({ search: "", priority: [], status_ids: [] })}
-            className="text-[0.7rem] text-[var(--rose)] hover:underline ml-1"
+            className="text-[0.7rem] text-[var(--accent)] hover:underline ml-1"
           >
             Wyczyść filtry
           </button>
@@ -511,9 +511,9 @@ export const TaskListView: React.FC = () => {
                   {/* Inline quick task creator */}
                   <form
                     onSubmit={(e) => handleInlineSubmit(grp, e)}
-                    className="flex items-center gap-2 px-3.5 py-2 mt-1 rounded-lg border border-dashed border-[var(--line)] hover:border-[var(--rose)]/40 transition"
+                    className="flex items-center gap-2 px-3.5 py-2 mt-1 rounded-lg border border-dashed border-[var(--line)] hover:border-[var(--accent)]/40 transition"
                   >
-                    <span className="text-[var(--rose)] text-sm font-bold">+</span>
+                    <span className="text-[var(--accent)] text-sm font-bold">+</span>
                     <input
                       type="text"
                       placeholder={`Dodaj zadanie do: ${grp.label} (Enter)...`}
@@ -531,7 +531,7 @@ export const TaskListView: React.FC = () => {
         })}
 
         {filteredTasks.length === 0 && (
-          <div className="p-8 text-center glass rounded-xl space-y-2">
+          <div className="p-8 text-center card rounded-xl space-y-2">
             <p className="text-sm font-semibold text-[var(--text)]">Brak zadań spełniających kryteria</p>
             <p className="text-xs text-[var(--muted)]">Zmień filtry lub dodaj nowe zadanie za pomocą paska powyżej.</p>
           </div>
@@ -543,8 +543,8 @@ export const TaskListView: React.FC = () => {
 
       {/* 5. Save View Modal */}
       {saveViewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="glass p-5 rounded-2xl max-w-sm w-full space-y-4 border border-[var(--edge)] shadow-2xl">
+        <div className="ov" role="dialog" aria-modal="true" onClick={() => setSaveViewModalOpen(false)}>
+          <div className="md max-w-sm w-full p-5 space-y-4" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-sm font-bold text-[var(--text)]">Zapisz bieżący widok</h3>
             <p className="text-xs text-[var(--muted)]">
               Zapisz aktualną konfigurację filtrów, grupowania i sortowania jako nowy widok.
@@ -555,14 +555,14 @@ export const TaskListView: React.FC = () => {
               placeholder="np. Moje zadania z terminem..."
               value={newViewName}
               onChange={(e) => setNewViewName(e.target.value)}
-              className="w-full bg-[var(--surface)] text-[var(--text)] text-xs px-3 py-2 rounded-xl border border-[var(--line)] outline-none focus:border-[var(--rose)]"
+              className="w-full bg-[var(--surface)] text-[var(--text)] text-xs px-3 py-2 rounded-xl border border-[var(--line)] outline-none focus:border-[var(--accent)]"
             />
             <div className="flex justify-end gap-2">
               <Button variant="ghost" size="sm" onClick={() => setSaveViewModalOpen(false)}>
                 Anuluj
               </Button>
               <Button
-                variant="rose"
+                variant="primary"
                 size="sm"
                 onClick={() => {
                   if (newViewName.trim()) {

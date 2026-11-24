@@ -30,7 +30,7 @@ export const ReportsTab: React.FC = () => {
           <Card key={idx} className="glass p-5 flex flex-col justify-between">
             <div>
               <div className="ch">
-                <span className="text-xs font-semibold text-[var(--rose)]">PDF / Excel</span>
+                <span className="text-xs font-semibold text-[var(--accent)]">PDF / Excel</span>
                 <span className="text-[0.68rem] opacity-75">{rep.date}</span>
               </div>
               <h3 className="text-base font-semibold text-[var(--text)]">{rep.title}</h3>

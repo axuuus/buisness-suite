@@ -112,7 +112,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, onMoveUp, onMoveDown }) 
           className={`w-4 h-4 rounded flex items-center justify-center border transition ${
             isDone
               ? "bg-[#4E7356] border-[#4E7356] text-white"
-              : "border-[var(--line)] hover:border-[var(--rose)]"
+              : "border-[var(--line)] hover:border-[var(--accent)]"
           }`}
           title={isDone ? "Oznacz jako nieukończone" : "Oznacz jako ukończone"}
         >
@@ -193,7 +193,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, onMoveUp, onMoveDown }) 
               return (
                 <span
                   key={uid}
-                  className="w-5 h-5 rounded-full bg-gradient-to-tr from-[var(--rose)] to-[var(--baby)] text-white text-[0.6rem] font-bold flex items-center justify-center border border-[var(--surface)]"
+                  className="w-5 h-5 rounded-full bg-gradient-to-tr from-[var(--accent)] to-[var(--blue-400)] text-white text-[0.6rem] font-bold flex items-center justify-center border border-[var(--surface)]"
                   title={name}
                 >
                   {name.charAt(0)}

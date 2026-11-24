@@ -95,13 +95,13 @@ export const SettingsTab: React.FC = () => {
           </div>
           <div>
             <span className="text-[var(--muted)] block">Twoja rola:</span>
-            <span className="font-semibold text-[var(--rose)]">{getRoleLabel(currentRole)}</span>
+            <span className="font-semibold text-[var(--accent)]">{getRoleLabel(currentRole)}</span>
           </div>
         </div>
       </div>
 
       {/* Członkowie & Zaproszenia */}
-      <div className="p-5 rounded-2xl glass space-y-4">
+      <div className="p-5 rounded-2xl card space-y-4">
         <h3 className="text-sm font-bold text-[var(--text)] border-b border-[var(--line)] pb-2">
           Członkowie Zespołu & Role
         </h3>
@@ -127,7 +127,7 @@ export const SettingsTab: React.FC = () => {
               <option value="member">Członek</option>
               <option value="viewer">Obserwator</option>
             </select>
-            <Button variant="rose" type="submit">
+            <Button variant="primary" type="submit">
               Zaproś do zespołu
             </Button>
           </form>
@@ -136,7 +136,7 @@ export const SettingsTab: React.FC = () => {
         )}
 
         {inviteFeedback && (
-          <div className="text-xs p-2 rounded-lg bg-[rgba(175,71,105,0.15)] text-[var(--rose)] font-medium">
+          <div className="text-xs p-2 rounded-lg bg-[rgba(47,107,255,0.12)] text-[var(--accent)] font-medium">
             {inviteFeedback}
           </div>
         )}
@@ -162,7 +162,7 @@ export const SettingsTab: React.FC = () => {
                     {m.profile.email}
                   </td>
                   <td data-l="Rola">
-                    <span className="chip font-medium text-[var(--rose)]">
+                    <span className="chip font-medium text-[var(--accent)]">
                       {getRoleLabel(m.role)}
                     </span>
                   </td>

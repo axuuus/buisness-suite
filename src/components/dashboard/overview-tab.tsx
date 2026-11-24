@@ -344,10 +344,10 @@ export const OverviewTab: React.FC = () => {
                         setIsStatusOpen(false);
                       }}
                     >
-                      <span className={opt.value === statusFilter ? "text-[var(--rose)] font-semibold" : ""}>
+                      <span className={opt.value === statusFilter ? "text-[var(--accent)] font-semibold" : ""}>
                         {opt.label}
                       </span>
-                      {opt.value === statusFilter && <span className="text-[var(--rose)] font-bold">✓</span>}
+                      {opt.value === statusFilter && <span className="text-[var(--accent)] font-bold">✓</span>}
                     </button>
                   ))}
                 </div>

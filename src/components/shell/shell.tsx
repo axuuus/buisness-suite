@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WorkspaceProvider, useWorkspace } from "@/context/workspace-context";
 import { TaskProvider, useTask } from "@/context/task-context";
-import { HeroBanner } from "@/components/shell/hero-banner";
+import { TopBar } from "@/components/shell/top-bar";
 import { Sidebar } from "@/components/shell/sidebar";
 import { CommandPalette } from "@/components/shell/command-palette";
-import { OverviewTab } from "@/components/dashboard/overview-tab";
+import { HomeView } from "@/components/dashboard/home-view";
+import { BudgetView } from "@/components/dashboard/budget-view";
 import { TaskListView } from "@/components/tasks/task-list-view";
 import { AnalyticsTab } from "@/components/dashboard/analytics-tab";
 import { CustomersTab } from "@/components/dashboard/customers-tab";
@@ -17,14 +18,39 @@ import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 
 const DashboardContent: React.FC = () => {
-  const { activeTab, setActiveTab, createWorkspace } = useWorkspace();
+  const { createWorkspace } = useWorkspace();
   const { spaces, createTask, setSelectedTaskId } = useTask();
+  const [activeNav, setActiveNav] = useState("home");
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   const [isNewWorkspaceModalOpen, setIsNewWorkspaceModalOpen] = useState(false);
   const [newWsName, setNewWsName] = useState("");
   const [newWsCurrency, setNewWsCurrency] = useState<"PLN" | "EUR" | "USD" | "GBP">("PLN");
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  // Sync activeNav with location hash
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "").toLowerCase();
+      if (["home", "work", "time", "budget", "invoices", "clients", "reports", "settings"].includes(hash)) {
+        setActiveNav(hash);
+      } else if (!hash) {
+        setActiveNav("home");
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  const handleNavChange = (nav: string) => {
+    setActiveNav(nav);
+    if (nav === "home") {
+      window.location.hash = "";
+    } else {
+      window.location.hash = nav;
+    }
+  };
 
   // New task form state
   const [taskTitle, setTaskTitle] = useState("");
@@ -49,7 +75,7 @@ const DashboardContent: React.FC = () => {
     if (!taskTitle.trim()) return;
     const created = createTask({ title: taskTitle.trim() });
     setIsNewTaskModalOpen(false);
-    setActiveTab("Tasks");
+    handleNavChange("work");
     setSelectedTaskId(created.id);
     showToast(`Utworzono zadanie "${taskTitle}"!`);
     setTaskTitle("");
@@ -57,28 +83,40 @@ const DashboardContent: React.FC = () => {
 
   return (
     <div className="shell h-screen flex flex-col overflow-hidden" id="shell">
-      {/* 1. Top Banner (Hero) */}
-      <HeroBanner onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
+      {/* 1. Top Bar */}
+      <TopBar
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        activeNav={activeNav}
+        setActiveNav={handleNavChange}
+      />
 
       {/* 2. Middle Body: Sidebar + Main Content Area */}
-      <div className="flex flex-1 min-h-0 h-full items-stretch overflow-hidden relative">
-        {/* Sidebar */}
-        <Sidebar
-          onNewTaskClick={() => setIsNewTaskModalOpen(true)}
-          onCreateWorkspaceClick={() => setIsNewWorkspaceModalOpen(true)}
-        />
+      {activeNav === "work" ? (
+        <div className="flex flex-1 min-h-0 h-full items-stretch overflow-hidden relative">
+          {/* Sidebar only in Work mode */}
+          <Sidebar
+            onNewTaskClick={() => setIsNewTaskModalOpen(true)}
+            onCreateWorkspaceClick={() => setIsNewWorkspaceModalOpen(true)}
+          />
 
-        {/* Scrollable Main Area */}
+          {/* Scrollable Work Main Area */}
+          <main className="main flex-1 min-h-0 h-full overflow-y-auto" id="main">
+            <TaskListView />
+          </main>
+        </div>
+      ) : (
         <main className="main flex-1 min-h-0 h-full overflow-y-auto" id="main">
-          {activeTab === "Overview" && <OverviewTab />}
-          {activeTab === "Tasks" && <TaskListView />}
-          {activeTab === "Analytics" && <AnalyticsTab />}
-          {activeTab === "Customers" && <CustomersTab />}
-          {activeTab === "Billing" && <BillingTab />}
-          {activeTab === "Reports" && <ReportsTab />}
-          {activeTab === "Settings" && <SettingsTab />}
+          <div className="p-4 md:p-6 max-w-[1440px] mx-auto w-full">
+            {activeNav === "home" && <HomeView />}
+            {activeNav === "budget" && <BudgetView />}
+            {activeNav === "time" && <AnalyticsTab />}
+            {activeNav === "invoices" && <BillingTab />}
+            {activeNav === "clients" && <CustomersTab />}
+            {activeNav === "reports" && <ReportsTab />}
+            {activeNav === "settings" && <SettingsTab />}
+          </div>
         </main>
-      </div>
+      )}
 
       {/* 3. Command Palette (Ctrl+K) */}
       <CommandPalette
@@ -128,7 +166,7 @@ const DashboardContent: React.FC = () => {
             <Button type="button" onClick={() => setIsNewTaskModalOpen(false)}>
               Anuluj
             </Button>
-            <Button variant="rose" type="submit">
+            <Button variant="primary" type="submit">
               Utwórz zadanie
             </Button>
           </div>
@@ -175,7 +213,7 @@ const DashboardContent: React.FC = () => {
             <Button type="button" onClick={() => setIsNewWorkspaceModalOpen(false)}>
               Anuluj
             </Button>
-            <Button variant="rose" type="submit">
+            <Button variant="primary" type="submit">
               Utwórz i przełącz
             </Button>
           </div>

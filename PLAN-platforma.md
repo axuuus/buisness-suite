@@ -78,9 +78,12 @@ Wzór kodu: `src/` z podziałem na funkcje (`features/tasks`, `features/budget`,
 
 ---
 
-## 4. System wyglądu (Velodrome Soft Pink Glass)
+## 4. System wyglądu (Velodrome Soft Pink Glass - ZASTĄPIONY)
 
-Wzór wizualny: dashboard z bannerem z rozmytymi pionowymi paskami, białe szklane karty, duże liczby, tooltipy-bąbelki, tabela produktów. Wersja referencyjna (HTML, działający prototyp): `reference/velodrome-dashboard.html`. **Kod referencyjny ma pierwszeństwo przed opisem.**
+> [!IMPORTANT]
+> **SEKCJA ZASTĄPIONA:** Poniższa sekcja 4 została trwale zastąpiona przez nadrzędną specyfikację **`DESIGN-v2-redesign.md`** ("Clean Data Light"). Wzór referencyjny: `reference/new-look/velodrome-new-look.html`. Stary prototyp różowego szkła przeniesiono do `reference/legacy/velodrome-dashboard.html`. Wszystkie nowe ekrany i komponenty budowane są według `DESIGN-v2-redesign.md`.
+
+Wzór wizualny archiwalny: dashboard z bannerem z rozmytymi pionowymi paskami, białe szklane karty, duże liczby, tooltipy-bąbelki, tabela produktów. Wersja referencyjna archiwalna: `reference/legacy/velodrome-dashboard.html`.
 
 ### 4.1 Paleta (tokeny)
 

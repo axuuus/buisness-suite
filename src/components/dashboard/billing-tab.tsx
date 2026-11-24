@@ -100,7 +100,7 @@ export const BillingTab: React.FC = () => {
                     <span className={`st ${inv.status === "Paid" ? "ok" : ""}`}>{inv.status}</span>
                   </td>
                   <td data-l="Akcje">
-                    <button type="button" className="text-xs text-[var(--rose)] hover:underline font-medium">
+                    <button type="button" className="text-xs text-[var(--accent)] hover:underline font-medium">
                       Pobierz PDF
                     </button>
                   </td>

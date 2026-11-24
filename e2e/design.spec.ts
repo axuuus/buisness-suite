@@ -5,22 +5,37 @@ test.describe("Design System Page (/design)", () => {
     await page.goto("/design");
 
     // Title
-    await expect(page.locator("h1")).toContainText("Galeria Komponentów Velodrome");
+    await expect(page.locator("h1")).toContainText("Galeria Komponentów");
 
-    // Section 1: Buttons
-    await expect(page.locator("h2").filter({ hasText: "1. Przyciski" })).toBeVisible();
+    // Section 1: Tokens
+    await expect(page.locator("h2").filter({ hasText: "Tokeny systemowe" })).toBeVisible();
 
-    // Section 2: Cards
-    await expect(page.locator("h2").filter({ hasText: "2. Karty KPI" })).toBeVisible();
+    // Section 2: Buttons
+    await expect(page.locator("h2").filter({ hasText: "Przyciski" })).toBeVisible();
 
-    // Section 3: Charts
-    await expect(page.locator("h2").filter({ hasText: "3. Wykresy Liniowe" })).toBeVisible();
+    // Section 3: Form inputs
+    await expect(page.locator("h2").filter({ hasText: "Pola zakresu" })).toBeVisible();
 
-    // Section 4: Badges
-    await expect(page.locator("h2").filter({ hasText: "4. Pigułki Statusu" })).toBeVisible();
+    // Section 4: Cards
+    await expect(page.locator("h2").filter({ hasText: "Karty solidne" })).toBeVisible();
 
-    // Section 5: Switches
-    await expect(page.locator("h2").filter({ hasText: "5. Przełączniki" })).toBeVisible();
+    // Section 5: Badges & Chips
+    await expect(page.locator("h2").filter({ hasText: "Chipy delty" })).toBeVisible();
+
+    // Section 6: Charts
+    await expect(page.locator("h2").filter({ hasText: "Wykresy systemowe" })).toBeVisible();
+
+    // Section 7: Tables
+    await expect(page.locator("h2").filter({ hasText: "Tabela z trybem" })).toBeVisible();
+
+    // Section 8: Floating elements
+    await expect(page.locator("h2").filter({ hasText: "Elementy pływające" })).toBeVisible();
+
+    // Section 9: States
+    await expect(page.locator("h2").filter({ hasText: "Stany komponentów" })).toBeVisible();
+
+    // Section 10: Shell
+    await expect(page.locator("h2").filter({ hasText: "Shell" })).toBeVisible();
   });
 
   test("toggles theme to dark and light", async ({ page }) => {
@@ -39,9 +54,9 @@ test.describe("Design System Page (/design)", () => {
     await page.goto("/design");
 
     // Click button to open modal
-    await page.getByRole("button", { name: "Otwórz Modal (.md)" }).click();
+    await page.getByRole("button", { name: "Otwórz modal" }).click();
     await expect(page.locator(".ov")).toBeVisible();
-    await expect(page.locator(".md h3")).toContainText("Przykładowy Szklany Modal");
+    await expect(page.locator(".md h3")).toContainText("Przykładowy Modal");
 
     // Close modal via button
     await page.getByRole("button", { name: "Zapisz zmiany" }).click();

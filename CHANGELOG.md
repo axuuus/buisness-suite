@@ -3,6 +3,37 @@
 Wszystkie istotne zmiany w projekcie będą dokumentowane w tym pliku.
 Format bazuje na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.4.0] - Faza R: Redesign "Clean Data Light" - 2026-11-24
+
+### Zmieniono & Zastąpiono
+- **System wyglądu:** Sekcja 4 `PLAN-platforma.md` trwale zastąpiona przez `DESIGN-v2-redesign.md`.
+- **Wycofanie Soft Pink Liquid Glass:** Usunięto stary banner hero z różowymi falami i wycofano wszystkie różowe tokeny (`--rose`, `--deep`, `--baby`, `.glass`, `.hg`).
+- **Styl Clean Data Light:**
+  - Solidne, białe karty (`.card`, `--surface: #fff`, `--sh-card`) bez `backdrop-filter`.
+  - Efekt szkła i rozmycia zarezerwowany wyłącznie dla elementów pływających (`.float`: tooltipy, popovery, modale, toasty, pasek poleceń).
+  - Nowa paleta kolorów: baza neutralna + niebieski akcent (`--blue-500: #2F6BFF`) + serie danych (kreskowane słupki, zielony/różowy/pomarańcz/czerwony).
+  - Krój fontu Geist (Google Fonts / CSS fallback).
+
+### Dodano
+- **Górny pasek nawigacyjny (`TopBar`):** Pigułki sekcji platformy (`Home`, `Work`, `Time`, `Budget`, `Invoices`, `Clients`, `Reports`), ikony akcji (szukaj `Ctrl+K`, powiadomienia z kropką, przełącznik motywu, awatar użytkownika). Panel boczny (`Sidebar`) widoczny wyłącznie w sekcji `Work`.
+- **Widok Przeglądu (`HomeView`):**
+  - Lejek przychodu (`FunnelBars`): 5 kolumn z ukośnym kreskowaniem, gradientem na aktywnej kolumnie, rampami SVG, bąbelkiem tooltip `.tip.float` i nawigacją klawiaturą (strzałki).
+  - Karta przychodu ze słupkami rozbicia (`StripeBars`): stała cena, godzinowo, retainer, wskaźnik WIP.
+  - Wykres schodkowy burn rate (`StepLine`): schodki z pionowymi kreskami pod wykresem i pigułką szczytu.
+  - Histogramy kropkowe (`DotHistogram`): macierze kropek z wyróżnioną kolumną szczytu i etykietą.
+  - Karta `InsightCard`: tło siatkowe mesh-gradient z szumem SVG (`feTurbulence`), ciemną kurtyną dolną, wielką liczbą i wskaźnikiem paginacji.
+  - Pasek poleceń `CommandBar`: pływający prompt z gwiazdką i tagiem encji.
+- **Widok Budżetu (`BudgetView`):**
+  - Tytuł projektu ("Rebranding Atlas"), eksport i ciemny przycisk główny ("Dodaj wydatek +").
+  - Pigułki widoków projektu (`.tabs`), 4 karty KPI (`.g4`), pasek zużycia budżetu (`.use`) z kreskowaniem i prognozą ponad 100%.
+  - Wykres burn-down (`BurnDown`) z liniami Plan / Rzeczywistość / Prognoza i osią tygodni.
+  - Tabela wydatków z nagłówkiem `--surface-2`, sortowaniem i transformacją w karty poniżej 640 px.
+- **Galeria `/design`:** Pełne odzwierciedlenie sekcji 13 specyfikacji (Tokeny, Przyciski, Pola, Karty, Chipy, Wykresy, Tabele, Elementy pływające, Stany, Shell).
+- **Skrypt weryfikacji wizualnej (`scripts/visual-compare.ts`):** Generuje 44 zrzuty porównawcze prototypu HTML i aplikacji w 5 szerokościach (360px, 768px, 1024px, 1440px, 2560px) w motywie jasnym i ciemnym, zapisując je do `reference/compare/`.
+- **Testy E2E Playwright:** 65 testów sprawdzających brak przewijania poziomego, responsywność, motywy, nawigację i interakcje.
+
+---
+
 ## [0.3.0] - Faza 2: Zadania i widok Lista - 2026-11-24
 
 ### Dodano
